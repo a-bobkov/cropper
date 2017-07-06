@@ -26,6 +26,7 @@ document.querySelector('.picker').addEventListener('change', function () {
             zoomable: false,
             dragMode: 'none',
             viewMode: 1,
+            responsive: false,
             background: false,
             restore: false,
             minContainerWidth: 1,
@@ -39,8 +40,6 @@ document.querySelector('.picker').addEventListener('change', function () {
 
         document.querySelector('.rotate').addEventListener('click', function() {
             cropper.rotate(90);
-//			var canvas = cropper.getCanvasData();
-//			adoptContainer(canvas.width, canvas.height);
             fitCanvasToContainer();
             fitCropBoxToCanvas();
         });
@@ -83,9 +82,21 @@ document.querySelector('.picker').addEventListener('change', function () {
 
         window.addEventListener('resize', function() {
             console.log('resize');
+            fitContainer();
             fitCanvasToContainer();
             fitCropBoxToCanvas();
         });
+
+        function fitContainer() {
+            var containerData = cropper.getContainerData();
+            console.log('containerData before: ', containerData);
+
+            containerData.width = cropper.container.offsetWidth;
+            containerData.height = cropper.container.offsetHeight;
+
+            containerData = cropper.getContainerData();
+            console.log('containerData after: ', containerData);
+        }
 
         function fitCanvasToContainer() {
             var containerData = cropper.getContainerData();
