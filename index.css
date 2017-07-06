@@ -1,7 +1,10 @@
 * { box-sizing: border-box; }
 html, body {margin: 0; height: 100%; }
 .picker {
+    position: absolute;
+    z-index: 1;
     height: 20px;
+    top: 0;
 }
 .source {
     max-width: 100%;
@@ -9,7 +12,7 @@ html, body {margin: 0; height: 100%; }
 }
 .screen {
     position: fixed;
-    top: 20px;
+    top: 0;
     right: 0;
     bottom: 0;
     left: 0;
@@ -18,10 +21,9 @@ html, body {margin: 0; height: 100%; }
 .modal {
     margin: 12px;
     width: calc(100% - 24px);
-    height: calc(100% - 24px - 20px);
+    height: calc(100% - 24px);
     position: absolute;
-    left: 0;
-    top: 20px;
+    top: 0;
     background-color: #333;
     display: flex;
     flex-flow: row wrap;
@@ -65,7 +67,8 @@ html, body {margin: 0; height: 100%; }
 
 .cropped-container {
     position: absolute;
-    bottom: 10;
+    z-index: 1;
+    top: 20px;
     height: 80px;
 }
 .cropped {

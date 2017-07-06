@@ -13,7 +13,6 @@ document.querySelector('.picker').addEventListener('change', function () {
             dragMode: 'none',
             viewMode: 1,
             background: false,
-//			responsive: false,
             restore: false,
             minContainerWidth: 1,
             minContainerHeight: 1,
@@ -39,10 +38,6 @@ document.querySelector('.picker').addEventListener('change', function () {
         document.querySelector('.vertic').addEventListener('click', function() {
             vertic = vertic * -1;
             cropper.scale(horiz, vertic);
-        });
-        document.querySelector('.fit').addEventListener('click', function() {
-            fitCanvasToContainer();
-            fitCropBoxToCanvas();
         });
         document.querySelector('.crop').addEventListener('click', function() {
             console.log('canvas start');
