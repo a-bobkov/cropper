@@ -5,14 +5,6 @@ document.querySelector('.picker').addEventListener('change', function () {
     img.onload = function initCropper() {
         console.log('loaded: ', file, img.width, img.height);
 
-        function adoptContainer(imgWidth, imgHeight) {
-            var container = document.querySelector('.container');
-            container.style.width = container.width + 'px';
-            container.style.height = container.height + 'px';
-        }
-        adoptContainer(img.width, img.height);
-//		throw new Error('stop');
-
         var image = document.querySelector('.source');
         var options = {
             aspectRatio: 4 / 3,
@@ -21,7 +13,7 @@ document.querySelector('.picker').addEventListener('change', function () {
             dragMode: 'none',
             viewMode: 1,
             background: false,
-            responsive: false,
+//			responsive: false,
             restore: false,
             minContainerWidth: 1,
             minContainerHeight: 1,
@@ -34,8 +26,6 @@ document.querySelector('.picker').addEventListener('change', function () {
 
         document.querySelector('.rotate').addEventListener('click', function() {
             cropper.rotate(90);
-//			var canvas = cropper.getCanvasData();
-//			adoptContainer(canvas.width, canvas.height);
             fitCanvasToContainer();
             fitCropBoxToCanvas();
         });
@@ -53,22 +43,6 @@ document.querySelector('.picker').addEventListener('change', function () {
         document.querySelector('.fit').addEventListener('click', function() {
             fitCanvasToContainer();
             fitCropBoxToCanvas();
-        });
-        document.querySelector('.get').addEventListener('click', function() {
-            var containerData = cropper.getContainerData();
-            console.log('containerData: ', containerData);
-            printSize('cropper.container', cropper.container);
-            printSize('modal', cropper.container.parentElement);
-            printSize('screen', cropper.container.parentElement.parentElement);
-            printSize('body', cropper.container.parentElement.parentElement.parentElement);
-            printSize('html', cropper.container.parentElement.parentElement.parentElement.parentElement);
-            console.log('window.innerWidth: ', window.innerWidth);
-            console.log('window.innerHeight: ', window.innerHeight);
-
-            function printSize(name, elem) {
-                console.log(name + '.offsetWidth: ', elem.offsetWidth);
-                console.log(name + '.offsetHeight: ', elem.offsetHeight);
-            }
         });
         document.querySelector('.crop').addEventListener('click', function() {
             console.log('canvas start');
@@ -88,21 +62,11 @@ document.querySelector('.picker').addEventListener('change', function () {
 
         window.addEventListener('resize', function() {
             console.log('resize');
-            cropper.container.parentElement.parentElement.style.width = (window.innerWidth - 50) + 'px';
-            cropper.container.parentElement.parentElement.style.height = (window.innerHeight - 50) + 'px';
 
-            fitContainer();
-            fitCanvasToContainer();
-            fitCropBoxToCanvas();
-        });
-
-        window.addEventListener('orientationchange', function() {
-            console.log('orientationchange');
             printSize('cropper.container', cropper.container);
             printSize('modal', cropper.container.parentElement);
-            printSize('screen', cropper.container.parentElement.parentElement);
-            printSize('body', cropper.container.parentElement.parentElement.parentElement);
-            printSize('html', cropper.container.parentElement.parentElement.parentElement.parentElement);
+            printSize('body', cropper.container.parentElement.parentElement);
+            printSize('html', cropper.container.parentElement.parentElement.parentElement);
             console.log('window.innerWidth: ', window.innerWidth);
             console.log('window.innerHeight: ', window.innerHeight);
 
@@ -110,18 +74,10 @@ document.querySelector('.picker').addEventListener('change', function () {
                 console.log(name + '.offsetWidth: ', elem.offsetWidth);
                 console.log(name + '.offsetHeight: ', elem.offsetHeight);
             }
+
+            fitCanvasToContainer();
+            fitCropBoxToCanvas();
         });
-
-        function fitContainer() {
-            var containerData = cropper.getContainerData();
-            console.log('containerData before: ', containerData);
-
-            containerData.width = cropper.container.offsetWidth;
-            containerData.height = cropper.container.offsetHeight;
-
-            containerData = cropper.getContainerData();
-            console.log('containerData after: ', containerData);
-        }
 
         function fitCanvasToContainer() {
             var containerData = cropper.getContainerData();
@@ -149,6 +105,8 @@ document.querySelector('.picker').addEventListener('change', function () {
         }
 
         function fitCropBoxToCanvas() {
+            cropper.crop();
+
             var cropBoxData = cropper.getCropBoxData();
             var canvasData = cropper.getCanvasData();
             console.log('fitCropBoxToCanvas canvasData: ', canvasData);
