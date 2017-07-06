@@ -59,6 +59,12 @@ document.querySelector('.picker').addEventListener('change', function () {
             fitCanvasToContainer();
             fitCropBoxToCanvas();
         });
+        document.querySelector('.get').addEventListener('click', function() {
+            var containerData = cropper.getContainerData();
+            console.log('containerData: ', containerData);
+            var canvasData = cropper.getCanvasData();
+            console.log('canvasData: ', canvasData);
+        });
         document.querySelector('.crop').addEventListener('click', function() {
             console.log('canvas start');
             var startCanvas = new Date;
