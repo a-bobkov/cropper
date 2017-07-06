@@ -54,6 +54,22 @@ document.querySelector('.picker').addEventListener('change', function () {
             fitCanvasToContainer();
             fitCropBoxToCanvas();
         });
+        document.querySelector('.get').addEventListener('click', function() {
+            var containerData = cropper.getContainerData();
+            console.log('containerData: ', containerData);
+            printSize('cropper.container', cropper.container);
+            printSize('modal', cropper.container.parentElement);
+            printSize('screen', cropper.container.parentElement.parentElement);
+            printSize('body', cropper.container.parentElement.parentElement.parentElement);
+            printSize('html', cropper.container.parentElement.parentElement.parentElement.parentElement);
+            console.log('window.innerWidth: ', window.innerWidth);
+            console.log('window.innerHeight: ', window.innerHeight);
+
+            function printSize(name, elem) {
+                console.log(name + '.offsetWidth: ', elem.offsetWidth);
+                console.log(name + '.offsetHeight: ', elem.offsetHeight);
+            }
+        });
         document.querySelector('.crop').addEventListener('click', function() {
             console.log('canvas start');
             var startCanvas = new Date;
@@ -72,6 +88,9 @@ document.querySelector('.picker').addEventListener('change', function () {
 
         window.addEventListener('resize', function() {
             console.log('resize');
+            cropper.container.parentElement.parentElement.style.width = (window.innerWidth - 50) + 'px';
+            cropper.container.parentElement.parentElement.style.height = (window.innerHeight - 50) + 'px';
+
             fitContainer();
             fitCanvasToContainer();
             fitCropBoxToCanvas();
@@ -79,8 +98,18 @@ document.querySelector('.picker').addEventListener('change', function () {
 
         window.addEventListener('orientationchange', function() {
             console.log('orientationchange');
-            console.log('cropper.container.offsetWidth: ', cropper.container.offsetWidth);
-            console.log('cropper.container.offsetHeight: ', cropper.container.offsetHeight);
+            printSize('cropper.container', cropper.container);
+            printSize('modal', cropper.container.parentElement);
+            printSize('screen', cropper.container.parentElement.parentElement);
+            printSize('body', cropper.container.parentElement.parentElement.parentElement);
+            printSize('html', cropper.container.parentElement.parentElement.parentElement.parentElement);
+            console.log('window.innerWidth: ', window.innerWidth);
+            console.log('window.innerHeight: ', window.innerHeight);
+
+            function printSize(name, elem) {
+                console.log(name + '.offsetWidth: ', elem.offsetWidth);
+                console.log(name + '.offsetHeight: ', elem.offsetHeight);
+            }
         });
 
         function fitContainer() {
