@@ -13,6 +13,7 @@ document.querySelector('.picker').addEventListener('change', function () {
             dragMode: 'none',
             viewMode: 1,
             background: false,
+            responsive: false,
             restore: false,
             minContainerWidth: 1,
             minContainerHeight: 1,
@@ -57,6 +58,9 @@ document.querySelector('.picker').addEventListener('change', function () {
 
         window.addEventListener('resize', function() {
             console.log('resize');
+
+            cropper.clear();
+            cropper.resize();
 
             printSize('cropper.container', cropper.container);
             printSize('modal', cropper.container.parentElement);
