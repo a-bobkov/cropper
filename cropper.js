@@ -1615,6 +1615,8 @@
             var self = this;
             var options = self.options;
             var container = self.container;
+            console.log('container before resize: ', container.offsetWidth, container.offsetHeight);
+
             var containerData = self.containerData;
             var minContainerWidth = Number(options.minContainerWidth) || 200;
             var minContainerHeight = Number(options.minContainerHeight) || 100;
