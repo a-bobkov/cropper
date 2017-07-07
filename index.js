@@ -59,9 +59,6 @@ document.querySelector('.picker').addEventListener('change', function () {
         window.addEventListener('resize', function() {
             console.log('resize');
 
-            cropper.clear();
-            cropper.resize();
-
             printSize('cropper.container', cropper.container);
             printSize('modal', cropper.container.parentElement);
             printSize('body', cropper.container.parentElement.parentElement);
@@ -74,13 +71,37 @@ document.querySelector('.picker').addEventListener('change', function () {
                 console.log(name + '.offsetHeight: ', elem.offsetHeight);
             }
 
-            fitCanvasToContainer();
-            fitCropBoxToCanvas();
+            var proportionalCropBox = getProportionalCropBox();
+            cropper.clear();
+            cropper.resize();
+            cropper.crop();
+            applyProportionalCropBox(proportionalCropBox);
         });
 
-        function fitCanvasToContainer() {
-            console.log('fitCanvasToContainer');
+        function getProportionalCropBox() {
+            var cropBoxData = cropper.getCropBoxData();
+            var canvasData = cropper.getCanvasData();
+            var proportionCropBox = {
+                proportionalWidth: cropBoxData.width / canvasData.width,
+                proportionalHeight: cropBoxData.height / canvasData.height,
+                proportionalLeft: (cropBoxData.left - canvasData.left) / canvasData.width,
+                proportionalTop: (cropBoxData.top - canvasData.top) / canvasData.height
+            };
+            return proportionCropBox;
+        }
 
+        function applyProportionalCropBox(propCropBox) {
+            var canvasData = cropper.getCanvasData();
+            var newCropBox = {
+                width: propCropBox.proportionalWidth * canvasData.width,
+                height: propCropBox.proportionalHeight * canvasData.height,
+                left: propCropBox.proportionalLeft * canvasData.width + canvasData.left,
+                top: propCropBox.proportionalTop * canvasData.height  + canvasData.top
+            };
+            cropper.setCropBoxData(newCropBox);
+        }
+
+        function fitCanvasToContainer() {
             var containerData = cropper.getContainerData();
             console.log('containerData: ', containerData);
             var canvasData = cropper.getCanvasData();
@@ -106,7 +127,6 @@ document.querySelector('.picker').addEventListener('change', function () {
         }
 
         function fitCropBoxToCanvas() {
-            console.log('fitCropBoxToCanvas');
             cropper.crop();
 
             var cropBoxData = cropper.getCropBoxData();
