@@ -1,5 +1,10 @@
 * { box-sizing: border-box; }
 html, body {margin: 0; height: 100%; }
+
+body {
+    overflow: hidden;
+}
+
 .picker {
     position: absolute;
     z-index: 1;
