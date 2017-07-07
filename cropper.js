@@ -1621,7 +1621,8 @@
 
             console.log('container before resize: ', container.offsetWidth, container.offsetHeight);
 
-            self.setCropBoxData({width: 4, height: 3, left: containerData.width / 2, top: containerData.height / 2 });
+//            self.setCropBoxData({width: 4, height: 3, left: containerData.width / 2, top: containerData.height / 2 });
+            self.clear();
 
             if (self.disabled || containerData.width === minContainerWidth || containerData.height === minContainerHeight) {
                 return;
