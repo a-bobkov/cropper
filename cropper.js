@@ -1653,6 +1653,8 @@
                     }
                 })();
             }
+
+            console.log('container after resize: ', container.offsetWidth, container.offsetHeight);
         },
         dblclick: function dblclick() {
             var self = this;

@@ -75,6 +75,8 @@ document.querySelector('.picker').addEventListener('change', function () {
         });
 
         function fitCanvasToContainer() {
+            console.log('fitCanvasToContainer');
+
             var containerData = cropper.getContainerData();
             console.log('containerData: ', containerData);
             var canvasData = cropper.getCanvasData();
@@ -100,6 +102,7 @@ document.querySelector('.picker').addEventListener('change', function () {
         }
 
         function fitCropBoxToCanvas() {
+            console.log('fitCropBoxToCanvas');
             cropper.crop();
 
             var cropBoxData = cropper.getCropBoxData();
