@@ -5,6 +5,8 @@ document.querySelector('.picker').addEventListener('change', function () {
     img.onload = function initCropper() {
         console.log('loaded: ', file, img.width, img.height);
 
+        document.querySelector('body').classList.add('modal-open');
+
         var image = document.querySelector('.source');
         var options = {
             aspectRatio: 4 / 3,
@@ -52,12 +54,20 @@ document.querySelector('.picker').addEventListener('change', function () {
             var img = document.querySelector('.cropped');
             img.onload = function() {
                 console.log('loaded cropped: ', img.width, img.height);
+                document.querySelector('body').classList.remove('modal-open');
             };
             img.src = dataUrl;
         });
 
         window.addEventListener('resize', function() {
             console.log('resize');
+
+            /**
+             *
+             */
+            var modal = cropper.container.parentElement;
+            modal.style.width = window.innerWidth + 'px';
+            modal.style.height = window.innerHeight + 'px';
 
             printSize('cropper.container', cropper.container);
             printSize('modal', cropper.container.parentElement);

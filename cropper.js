@@ -937,6 +937,18 @@
                 height: Math.max(container.offsetHeight, Number(options.minContainerHeight) || 100)
             };
 
+            printSize('cropper.container', self.container);
+            printSize('modal', self.container.parentElement);
+            printSize('body', self.container.parentElement.parentElement);
+            printSize('html', self.container.parentElement.parentElement.parentElement);
+            console.log('window.innerWidth: ', window.innerWidth);
+            console.log('window.innerHeight: ', window.innerHeight);
+
+            function printSize(name, elem) {
+                console.log(name + '.offsetWidth: ', elem.offsetWidth);
+                console.log(name + '.offsetHeight: ', elem.offsetHeight);
+            }
+
             setStyle(cropper, {
                 width: containerData.width,
                 height: containerData.height
