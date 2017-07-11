@@ -30,8 +30,11 @@
     <p>test test test test test test test</p>
     <p>test test test test test test test</p>
     <input type="file" class='picker'/>
+    <br>
+    <button class='loader'>load file</button>
+    <input type="text" class='loadUrl' value='https://a-bobkov.github.io/admin/polina%20copy.JPG'/>
     <div class='cropped-container'>
-        <img class='cropped'>
+        <canvas class='cropped'></canvas>
     </div>
     <p>test test test test test test test</p>
     <p>test test test test test test test</p>
@@ -66,6 +69,9 @@
     <div class='modal'>
         <div class='container'>
             <img class='source'/>
+            <div class='spinner'>
+                <img src='https://a-bobkov.github.io/cropper/white-spinner.gif'>
+            </div>
         </div>
         <div class='actions'>
             <button class='action rotate'>rotate</button>

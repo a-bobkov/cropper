@@ -1,17 +1,23 @@
 * { box-sizing: border-box; }
 html, body {margin: 0; height: 100%; }
 
+.loader {
+    width: 74px;
+}
+.loadUrl {
+    width: calc(100% - 100px);
+}
 .modal-open {
     overflow: hidden;
-}
-.source {
-    display: none;
 }
 .cropped-container {
     height: 100px;
 }
 .cropped {
     max-height: 100%;
+}
+.source {
+    display: none;
 }
 .modal {
     display: none;
@@ -83,4 +89,16 @@ body.modal-open .modal{
 .container .cropper-point {
     width: 15px;
     height: 15px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.spinner {
+    display: none;
+}
+.spinner.show {
+    display: block;
 }
